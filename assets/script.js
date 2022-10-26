@@ -11,7 +11,7 @@ var citySearch = document.querySelector(".search");
 //make buttons fill at start
 function startPage() {
   let searches = localStorage.getItem("cities");
-  if (searches.valueOf != "") {
+  if (searches) {
     SEARCHED_CITIES = JSON.parse(searches);
     console.log(SEARCHED_CITIES);
     createSearchedBut();
