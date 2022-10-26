@@ -13,7 +13,6 @@ function startPage() {
   let searches = localStorage.getItem("cities");
   if (searches) {
     SEARCHED_CITIES = JSON.parse(searches);
-    console.log(SEARCHED_CITIES);
     createSearchedBut();
   }
 }
@@ -53,7 +52,6 @@ function createSearchedBut() {
     newButton.setAttribute("city-search", SEARCHED_CITIES[i]);
     newButton.classList.add("button-history");
     previousSearchEl.append(newButton);
-    console.log(innerButtonTxt);
   }
 }
 //fetches latitude and longitude
@@ -99,7 +97,6 @@ function buildBoxes(city, data) {
   const fiveDayDiv = document.getElementById("5-day-forecast");
   fiveDayDiv.innerHTML = "";
   for (let i = 7; i <= weatherData.length; i += 8) {
-    console.log(weatherData[i]);
     let newBox = document.createElement("div");
     newBox.setAttribute("class", "day-box");
     let newBoxDate = document.createElement("h4");
