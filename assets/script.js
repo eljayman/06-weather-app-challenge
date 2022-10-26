@@ -100,6 +100,7 @@ function weatherGetter(location) {
 function buildBoxes(city, data) {
   const weatherData = data.list;
   const fiveDayDiv = document.getElementById("5-day-forecast");
+  fiveDayDiv.innerHTML = "";
   for (let i = 7; i <= weatherData.length; i += 8) {
     console.log(weatherData[i]);
     let newBox = document.createElement("div");
