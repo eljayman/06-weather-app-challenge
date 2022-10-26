@@ -8,17 +8,15 @@ var searchButton = document.getElementById("submit");
 var previousSearchEl = document.getElementById("previous-searches");
 var citySearch = document.querySelector(".search");
 
-//make buttons fill header and create 5 day forecast at start
+//make buttons fill at start
 function startPage() {
   let searches = localStorage.getItem("cities");
   if (searches.valueOf != "") {
     SEARCHED_CITIES = JSON.parse(searches);
     console.log(SEARCHED_CITIES);
     createSearchedBut();
-    // createForecast();
   }
 }
-// function createForecast(){}
 
 //function for search button
 function searchButtonClick(e) {
@@ -29,8 +27,6 @@ function searchButtonClick(e) {
     storeCityInput();
     localStorage.setItem("cities", JSON.stringify(SEARCHED_CITIES));
     createSearchedBut();
-  } else {
-    console.log("empty");
   }
 }
 //function for history buttons
@@ -38,12 +34,11 @@ function historyClickSearch(e) {
   if (!e.target.matches(".button-history")) {
     return;
   }
-
   var targetButton = e.target;
   var searchCity = targetButton.getAttribute("city-search");
   geoTagGetter(searchCity);
 }
-
+// adds new cities to array
 function storeCityInput() {
   SEARCHED_CITIES.push(citySearch.value);
 }
@@ -61,6 +56,7 @@ function createSearchedBut() {
     console.log(innerButtonTxt);
   }
 }
+//fetches latitude and longitude
 function geoTagGetter(searchCity) {
   var geoTagURL = `http://api.openweathermap.org/geo/1.0/direct?q=${searchCity},&limit=3&appid=9d210472671fcdc77c0c14f3da00bbf0`;
 
@@ -79,7 +75,7 @@ function geoTagGetter(searchCity) {
       console.error(err);
     });
 }
-
+// fetches weather data
 function weatherGetter(location) {
   const city = location.name;
   const lat = location.lat;
@@ -97,6 +93,7 @@ function weatherGetter(location) {
       console.error(err);
     });
 }
+// builds forecast boxes
 function buildBoxes(city, data) {
   const weatherData = data.list;
   const fiveDayDiv = document.getElementById("5-day-forecast");
@@ -131,6 +128,7 @@ function buildBoxes(city, data) {
     fiveDayDiv.append(newBox);
   }
 }
+// updates current weather
 function currentCityHelper(city, data) {
   const iconWeather = data.list[0].weather[0].icon;
   var iconURL = ` http://openweathermap.org/img/wn/${iconWeather}.png`;
@@ -145,8 +143,15 @@ function currentCityHelper(city, data) {
   var currentCityHum = document.getElementById("current-humidity");
   currentCityHum.innerHTML = `Humidity: ${data.list[0].main.humidity} %`;
 }
-console.log(currentTime.format("M/D/YYYY H:M"));
 
+// fire at start
 startPage();
+
+// event listeners
 searchButton.addEventListener("click", searchButtonClick);
 previousSearchEl.addEventListener("click", historyClickSearch);
+citySearch.addEventListener("keypress", function (e) {
+  if (e.key === "Enter") {
+    searchButtonClick(e);
+  }
+});
