@@ -102,7 +102,7 @@ function buildBoxes(city, data) {
     let newBoxDate = document.createElement("h4");
     newBoxDate.setAttribute("class", "day-box-date");
     let iconWeatherDay = weatherData[i].weather[0].icon;
-    let iconDayURL = ` https://openweathermap.org/img/wn/${iconWeatherDay}.png`;
+    let iconDayURL = ` http://openweathermap.org/img/wn/${iconWeatherDay}.png`;
     let currentCityIconDay = document.createElement("img");
     currentCityIconDay.setAttribute("src", iconDayURL);
     newBoxDate.innerHTML = `${dayjs(weatherData[i].dt_txt).format(
