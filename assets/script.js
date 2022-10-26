@@ -58,7 +58,7 @@ function createSearchedBut() {
 }
 //fetches latitude and longitude
 function geoTagGetter(searchCity) {
-  var geoTagURL = `http://api.openweathermap.org/geo/1.0/direct?q=${searchCity},&limit=3&appid=9d210472671fcdc77c0c14f3da00bbf0`;
+  var geoTagURL = `https://api.openweathermap.org/geo/1.0/direct?q=${searchCity},&limit=3&appid=9d210472671fcdc77c0c14f3da00bbf0`;
 
   fetch(geoTagURL)
     .then(function (res) {
@@ -80,7 +80,7 @@ function weatherGetter(location) {
   const city = location.name;
   const lat = location.lat;
   const lon = location.lon;
-  const weatherGetURL = `http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=imperial&appid=9d210472671fcdc77c0c14f3da00bbf0`;
+  const weatherGetURL = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=imperial&appid=9d210472671fcdc77c0c14f3da00bbf0`;
   fetch(weatherGetURL)
     .then(function (res) {
       return res.json();
@@ -105,7 +105,7 @@ function buildBoxes(city, data) {
     let newBoxDate = document.createElement("h4");
     newBoxDate.setAttribute("class", "day-box-date");
     let iconWeatherDay = weatherData[i].weather[0].icon;
-    let iconDayURL = ` http://openweathermap.org/img/wn/${iconWeatherDay}.png`;
+    let iconDayURL = ` https://openweathermap.org/img/wn/${iconWeatherDay}.png`;
     let currentCityIconDay = document.createElement("img");
     currentCityIconDay.setAttribute("src", iconDayURL);
     newBoxDate.innerHTML = `${dayjs(weatherData[i].dt_txt).format(
